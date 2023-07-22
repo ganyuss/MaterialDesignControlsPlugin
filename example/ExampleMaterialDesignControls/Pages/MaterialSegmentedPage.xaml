@@ -81,20 +81,6 @@
                     <material:MaterialLabel
                         FontFamily="{StaticResource SemiBoldFont}"
                         HorizontalTextAlignment="Center"
-                        Text="Icons" />
-                        
-                    <material3:MaterialSegmented
-                        ItemsSource="{Binding Items}"
-                        SegmentMargin="0"
-                        SelectedColor="{StaticResource GradientColorTransparent1}"
-                        SelectedIcon="{utils:ResourceImageSource ExampleMaterialDesignControls.Resources.Png.selected_b.png}"
-                        BorderColor="DimGray" />
-
-                    <material:MaterialDivider Margin="0,10" />
-
-                    <material:MaterialLabel
-                        FontFamily="{StaticResource SemiBoldFont}"
-                        HorizontalTextAlignment="Center"
                         Text="Five Items" />
 
                     <material3:MaterialSegmented

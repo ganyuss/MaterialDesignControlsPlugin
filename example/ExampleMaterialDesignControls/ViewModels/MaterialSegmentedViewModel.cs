@@ -124,7 +124,7 @@ namespace ExampleMaterialDesignControls.ViewModels
             Backlight = new ObservableCollection<string> { "Backlight On","Backlight Off"};
             Frecuently = new ObservableCollection<string> { "Day","Week","Month"};
 
-            SegmentTypes = new ObservableCollection<SegmentedType> { SegmentedType.Filled, SegmentedType.Outlined };
+            SegmentTypes = new ObservableCollection<SegmentedType> { SegmentedType.Outlined, SegmentedType.Filled };
 
             AvailableColors = new ObservableCollection<SelectableColor>
             {
