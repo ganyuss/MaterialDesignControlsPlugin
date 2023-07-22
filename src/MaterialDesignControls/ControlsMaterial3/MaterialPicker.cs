@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Specialized;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using Plugin.MaterialDesignControls.Utils;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -137,7 +138,7 @@ namespace Plugin.MaterialDesignControls.Material3
             var control = (MaterialPicker)bindable;
             if (newValue is not null)
             {
-                var newItem = string.IsNullOrWhiteSpace(control.PropertyPath) ? newValue.ToString() : GetPropertyValue(newValue, control.PropertyPath);
+                var newItem = string.IsNullOrWhiteSpace(control.PropertyPath) ? newValue.ToString() : PropertyPathHelper.GetPropertyValue(newValue, control.PropertyPath);
                 control.pckOptions.SelectedItem = newItem;
                 control.InternalUpdateSelectedIndex();
             }
@@ -156,7 +157,7 @@ namespace Plugin.MaterialDesignControls.Material3
             {
                 foreach (var item in (IEnumerable)newValue)
                 {
-                    var newItem = string.IsNullOrWhiteSpace(control.PropertyPath) ? item.ToString() : GetPropertyValue(item, control.PropertyPath);
+                    var newItem = string.IsNullOrWhiteSpace(control.PropertyPath) ? item.ToString() : PropertyPathHelper.GetPropertyValue(item, control.PropertyPath);
                     control.pckOptions.Items.Add(newItem);
                 }
             }
@@ -178,8 +179,8 @@ namespace Plugin.MaterialDesignControls.Material3
                     }
                     else if (item != null && this.SelectedItem != null && !string.IsNullOrWhiteSpace(this.PropertyPath))
                     {
-                        var itemValue = GetPropertyValue(item, this.PropertyPath);
-                        var selectedItemValue = GetPropertyValue(this.SelectedItem, this.PropertyPath);
+                        var itemValue = PropertyPathHelper.GetPropertyValue(item, this.PropertyPath);
+                        var selectedItemValue = PropertyPathHelper.GetPropertyValue(this.SelectedItem, this.PropertyPath);
                         if (itemValue.Equals(selectedItemValue))
                         {
                             selectedIndex = index;
@@ -286,7 +287,7 @@ namespace Plugin.MaterialDesignControls.Material3
                 {
                     foreach (var item in e.NewItems)
                     {
-                        var newItem = string.IsNullOrWhiteSpace(control.PropertyPath) ? item.ToString() : GetPropertyValue(item, control.PropertyPath);
+                        var newItem = string.IsNullOrWhiteSpace(control.PropertyPath) ? item.ToString() : PropertyPathHelper.GetPropertyValue(item, control.PropertyPath);
                         control.pckOptions.Items.Add(newItem);
                     }
                 }

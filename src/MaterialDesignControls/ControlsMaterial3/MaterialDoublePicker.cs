@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Specialized;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using Plugin.MaterialDesignControls.Utils;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -190,7 +191,7 @@ namespace Plugin.MaterialDesignControls.Material3
             {
                 foreach (var item in (IEnumerable)newValue)
                 {
-                    var newItem = string.IsNullOrWhiteSpace(control.PropertyPath) ? item.ToString() : GetPropertyValue(item, control.PropertyPath);
+                    var newItem = string.IsNullOrWhiteSpace(control.PropertyPath) ? item.ToString() : PropertyPathHelper.GetPropertyValue(item, control.PropertyPath);
                     control.pckOptions.Items.Add(newItem);
                 }
             }
@@ -205,7 +206,7 @@ namespace Plugin.MaterialDesignControls.Material3
             {
                 foreach (var item in (IEnumerable)newValue)
                 {
-                    var newItem = string.IsNullOrWhiteSpace(control.SecondaryPropertyPath) ? item.ToString() : GetPropertyValue(item, control.SecondaryPropertyPath);
+                    var newItem = string.IsNullOrWhiteSpace(control.SecondaryPropertyPath) ? item.ToString() : PropertyPathHelper.GetPropertyValue(item, control.SecondaryPropertyPath);
                     control.pckOptions.SecondaryItems.Add(newItem);
                 }
             }
@@ -227,8 +228,8 @@ namespace Plugin.MaterialDesignControls.Material3
                     }
                     else if (item != null && this.SelectedItem != null && !string.IsNullOrWhiteSpace(this.PropertyPath))
                     {
-                        var itemValue = GetPropertyValue(item, this.PropertyPath);
-                        var selectedItemValue = GetPropertyValue(this.SelectedItem, this.PropertyPath);
+                        var itemValue = PropertyPathHelper.GetPropertyValue(item, this.PropertyPath);
+                        var selectedItemValue = PropertyPathHelper.GetPropertyValue(this.SelectedItem, this.PropertyPath);
                         if (itemValue.Equals(selectedItemValue))
                         {
                             selectedIndex = index;
@@ -252,8 +253,8 @@ namespace Plugin.MaterialDesignControls.Material3
                     }
                     else if (item != null && this.SecondarySelectedItem != null && !string.IsNullOrWhiteSpace(this.SecondaryPropertyPath))
                     {
-                        var itemValue = GetPropertyValue(item, this.SecondaryPropertyPath);
-                        var secondarySelectedItemValue = GetPropertyValue(this.SecondarySelectedItem, this.SecondaryPropertyPath);
+                        var itemValue = PropertyPathHelper.GetPropertyValue(item, this.SecondaryPropertyPath);
+                        var secondarySelectedItemValue = PropertyPathHelper.GetPropertyValue(this.SecondarySelectedItem, this.SecondaryPropertyPath);
                         if (itemValue.Equals(secondarySelectedItemValue))
                         {
                             secondarySelectedIndex = index;
@@ -382,7 +383,7 @@ namespace Plugin.MaterialDesignControls.Material3
                 {
                     foreach (var item in e.NewItems)
                     {
-                        var newItem = string.IsNullOrWhiteSpace(control.PropertyPath) ? item.ToString() : GetPropertyValue(item, control.PropertyPath);
+                        var newItem = string.IsNullOrWhiteSpace(control.PropertyPath) ? item.ToString() : PropertyPathHelper.GetPropertyValue(item, control.PropertyPath);
                         control.pckOptions.Items.Add(newItem);
                     }
                 }
@@ -406,7 +407,7 @@ namespace Plugin.MaterialDesignControls.Material3
                 {
                     foreach (var item in e.NewItems)
                     {
-                        var newItem = string.IsNullOrWhiteSpace(control.SecondaryPropertyPath) ? item.ToString() : GetPropertyValue(item, control.SecondaryPropertyPath);
+                        var newItem = string.IsNullOrWhiteSpace(control.SecondaryPropertyPath) ? item.ToString() : PropertyPathHelper.GetPropertyValue(item, control.SecondaryPropertyPath);
                         control.pckOptions.SecondaryItems.Add(newItem);
                     }
                 }
