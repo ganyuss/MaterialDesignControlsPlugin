@@ -254,6 +254,25 @@ namespace Plugin.MaterialDesignControls.Material3
             get { return (bool)GetValue(ShowSelectedIconProperty); }
             set { SetValue(ShowSelectedIconProperty, value); }
         }
+        
+        
+        public static readonly BindableProperty CommandProperty = 
+            BindableProperty.Create(nameof(Command), typeof(ICommand), typeof(MaterialSegmentedBase), null);
+        
+        public ICommand Command
+        {
+            get { return (ICommand)GetValue(CommandProperty); }
+            set { SetValue(CommandProperty, value); }
+        }
+
+        public static readonly BindableProperty CommandParameterProperty = 
+            BindableProperty.Create(nameof(CommandParameter), typeof(object), typeof(MaterialSegmentedBase), null);
+        
+        public object CommandParameter
+        {
+            get { return GetValue(CommandParameterProperty); }
+            set { SetValue(CommandParameterProperty, value); }
+        }
 
         #endregion Properties
 
@@ -385,7 +404,16 @@ namespace Plugin.MaterialDesignControls.Material3
                     var tapped = new TapGestureRecognizer();
                     
                     var i1 = i;
-                    tapped.Tapped += (_, _) => { OnItemTapped(i1); };
+                    tapped.Tapped += (_, _) =>
+                    {
+                        if (!IsEnabled)
+                            return;
+                        
+                        OnItemTapped(i1);
+                        
+                        if (Command != null && Command.CanExecute(CommandParameter))
+                            Command.Execute(CommandParameter);
+                    };
 
                     stackLayout.Children.Add(selectedIcon);
                     stackLayout.Children.Add(leadingIcon);

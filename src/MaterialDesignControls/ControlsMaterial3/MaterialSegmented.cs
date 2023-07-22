@@ -18,9 +18,6 @@ public class MaterialSegmented : MaterialSegmentedBase
 
     protected override void OnItemTapped(int itemIndex)
     {
-        if (!IsEnabled)
-            return;
-
         SelectedItem = ItemsSource[itemIndex];
         
         SelectedItemChanged?.Invoke(this, new SelectedItemChangedEventArgs(SelectedItem, itemIndex));

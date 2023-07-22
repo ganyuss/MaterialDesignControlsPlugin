@@ -21,9 +21,6 @@ public class MaterialSegmentedMulti : MaterialSegmentedBase
     
     protected override void OnItemTapped(int itemIndex)
     {
-        if (!IsEnabled)
-            return;
-
         var itemTapped = ItemsSource[itemIndex];
 
         IList<object> previousSelection = SelectedItems.Cast<object>().ToList();
