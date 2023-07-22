@@ -99,7 +99,21 @@ namespace ExampleMaterialDesignControls.ViewModels
             get { return selectedColor; }
             set { SetProperty(ref selectedColor, value); }
         }
-
+        
+        private ObservableCollection<ImageSource> availableIcons;
+        public ObservableCollection<ImageSource> AvailableIcons
+        {
+            get { return availableIcons; }
+            set { SetProperty(ref availableIcons, value); }
+        }
+        
+        private ImageSource selectedIcon; 
+        public ImageSource SelectedIcon
+        {
+            get { return selectedIcon; }
+            set { SetProperty(ref selectedIcon, value); }
+        }
+        
         public MaterialSegmentedViewModel()
         {
             Items = new ObservableCollection<string> { "Complete","Incomplete","Pending"};
@@ -118,12 +132,14 @@ namespace ExampleMaterialDesignControls.ViewModels
                 new() { Color = Color.Aquamarine, ColorName = nameof(Color.Aquamarine) },
                 new() { Color = Color.Lavender, ColorName = nameof(Color.Lavender) }
             };
-        }
 
-        public ICommand SaveCommand => new Command( async()=>
-        {
-            await this.DisplayAlert.Invoke("Size", $"Selected item: {SelectedItem}", "Ok");
-        });
+            AvailableIcons = new ObservableCollection<ImageSource>
+            {
+                new FontImageSource() { Glyph = "★", Color = Color.Black },
+                new FontImageSource() { Glyph = "✺", Color = Color.Black },
+                new FontImageSource() { Glyph = "»", Color = Color.Black },
+            };
+        }
 
         public class SelectableColor : ObservableObject
         {

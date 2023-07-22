@@ -27,6 +27,13 @@
             <ScrollView Grid.Row="1" VerticalScrollBarVisibility="Never">
                 <StackLayout Padding="20,0,20,20" Spacing="20">
                     
+
+                    <material:MaterialLabel
+                        FontFamily="{StaticResource LightFont}"
+                        HorizontalTextAlignment="Start"
+                        FontSize="12"
+                        Text="options" />
+                    
                     <material3:MaterialSegmented
                         ItemsSource="{Binding SegmentTypes}"
                         SegmentMargin="0"
@@ -43,15 +50,29 @@
                         LeadingIconPropertyPath="ColorIcon"
                         TextPropertyPath="ColorName"
                         FontSize="12"
-                        SelectedColor="{Binding SelectedColor.Color}"
+                        SelectedColor="{Binding SelectedColor.Color}" />
+                    
+                    <material3:MaterialSegmented
+                        ItemsSource="{Binding AvailableIcons}"
+                        SegmentMargin="0"
+                        SelectedItem="{Binding SelectedIcon}"
+                        SelectedIcon="{utils:ResourceImageSource ExampleMaterialDesignControls.Resources.Png.selected_b.png}"
+                        LeadingIconPropertyPath="."
+                        SelectedColor="{StaticResource GradientColorTransparent1}"
                         Margin="0, 0, 0, 20" />
+                    
+                    <material:MaterialLabel
+                        FontFamily="{StaticResource LightFont}"
+                        HorizontalTextAlignment="Start"
+                        FontSize="12"
+                        Text="Result" />
                     
                     <material3:MaterialSegmented
                         ItemsSource="{Binding Items}"
                         SegmentMargin="0"
                         SelectedItem="{Binding SelectedItem}"
                         SegmentType="{Binding SelectedSegmentType}"
-                        SelectedIcon="{utils:ResourceImageSource ExampleMaterialDesignControls.Resources.Png.selected_b.png}"
+                        SelectedIcon="{Binding SelectedIcon}"
                         BorderColor="DimGray"
                         SelectedColor="{Binding SelectedColor.Color}" />
 
@@ -222,11 +243,6 @@
                             SelectedColor="{StaticResource GradientColor1}"
                             SelectedTextColor="White" />
                     </StackLayout>
-                    <material3:MaterialButton
-                        Command="{Binding SaveCommand}"
-                        HorizontalOptions="Fill"
-                        Text="Save"
-                        VerticalOptions="EndAndExpand" />
                 </StackLayout>
             </ScrollView>
         </Grid>
