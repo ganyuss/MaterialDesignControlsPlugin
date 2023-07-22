@@ -33,7 +33,7 @@ namespace Plugin.MaterialDesignControls.Material3
 
         #region Constructors
 
-        public MaterialSegmentedBase()
+        protected MaterialSegmentedBase()
         {
             InitializeComponent();
             Initialize();
