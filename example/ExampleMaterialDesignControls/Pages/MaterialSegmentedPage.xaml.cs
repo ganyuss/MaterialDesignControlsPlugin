@@ -16,5 +16,10 @@ namespace ExampleMaterialDesignControls.Pages
         {
             DisplayAlert("Message","Segment Is Selected Changed","OK");
         }
+
+        private void SizeSelectionChanged(object sender, SelectedItemChangedEventArgs e)
+        {
+            DisplayAlert("Size",$"Selected command: {e.SelectedItem}","OK");
+        }
     }
 }

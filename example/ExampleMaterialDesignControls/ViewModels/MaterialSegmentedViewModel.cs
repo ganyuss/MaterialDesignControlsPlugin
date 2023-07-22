@@ -125,11 +125,6 @@ namespace ExampleMaterialDesignControls.ViewModels
             await this.DisplayAlert.Invoke("Size", $"Selected item: {SelectedItem}", "Ok");
         });
 
-        public ICommand SelectCommand => new Command( async ()=>
-        {
-            await this.DisplayAlert.Invoke("Size", $"Selected command: {SelectedSize}", "Ok");
-        });
-
         public class SelectableColor : ObservableObject
         {
             private Color _color;

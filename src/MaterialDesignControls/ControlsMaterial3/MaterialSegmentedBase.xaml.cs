@@ -16,7 +16,7 @@ namespace Plugin.MaterialDesignControls.Material3
         Filled
     }
     
-    public partial class MaterialSegmented : ContentView
+    public abstract partial class MaterialSegmentedBase : ContentView
     {
         #region Fields
 
@@ -27,13 +27,13 @@ namespace Plugin.MaterialDesignControls.Material3
 
         private bool itemFramesSetup => itemFrames.Count > 0;
 
-        private readonly List<CustomFrame> itemFrames = new List<CustomFrame>();
+        protected readonly List<CustomFrame> itemFrames = new List<CustomFrame>();
 
         #endregion Fields
 
         #region Constructors
 
-        public MaterialSegmented()
+        public MaterialSegmentedBase()
         {
             InitializeComponent();
             Initialize();
@@ -44,7 +44,7 @@ namespace Plugin.MaterialDesignControls.Material3
         #region Properties
 
         public new static readonly BindableProperty BackgroundColorProperty =
-            BindableProperty.Create(nameof(BackgroundColor), typeof(Color), typeof(MaterialSegmented), defaultValue: Color.White);
+            BindableProperty.Create(nameof(BackgroundColor), typeof(Color), typeof(MaterialSegmentedBase), defaultValue: Color.White);
 
         public new Color BackgroundColor
         {
@@ -53,7 +53,7 @@ namespace Plugin.MaterialDesignControls.Material3
         }
 
         public static readonly BindableProperty DisabledBackgroundColorProperty =
-            BindableProperty.Create(nameof(DisabledBackgroundColor), typeof(Color), typeof(MaterialSegmented), defaultValue: Color.White);
+            BindableProperty.Create(nameof(DisabledBackgroundColor), typeof(Color), typeof(MaterialSegmentedBase), defaultValue: Color.White);
 
         public Color DisabledBackgroundColor
         {
@@ -62,7 +62,7 @@ namespace Plugin.MaterialDesignControls.Material3
         }
 
         public static readonly BindableProperty SelectedColorProperty =
-            BindableProperty.Create(nameof(SelectedColor), typeof(Color), typeof(MaterialSegmented), defaultValue: Color.FromHex("#2e85cc"));
+            BindableProperty.Create(nameof(SelectedColor), typeof(Color), typeof(MaterialSegmentedBase), defaultValue: Color.FromHex("#2e85cc"));
 
         public Color SelectedColor
         {
@@ -71,7 +71,7 @@ namespace Plugin.MaterialDesignControls.Material3
         }
 
         public static readonly BindableProperty DisabledSelectedColorProperty =
-            BindableProperty.Create(nameof(DisabledSelectedColor), typeof(Color), typeof(MaterialSegmented), defaultValue: Color.LightGray);
+            BindableProperty.Create(nameof(DisabledSelectedColor), typeof(Color), typeof(MaterialSegmentedBase), defaultValue: Color.LightGray);
 
         public Color DisabledSelectedColor
         {
@@ -80,7 +80,7 @@ namespace Plugin.MaterialDesignControls.Material3
         }
 
         public static readonly BindableProperty UnselectedColorProperty =
-            BindableProperty.Create(nameof(UnselectedColor), typeof(Color), typeof(MaterialSegmented), defaultValue: Color.White);
+            BindableProperty.Create(nameof(UnselectedColor), typeof(Color), typeof(MaterialSegmentedBase), defaultValue: Color.White);
 
         public Color UnselectedColor
         {
@@ -89,7 +89,7 @@ namespace Plugin.MaterialDesignControls.Material3
         }
 
         public static readonly BindableProperty DisabledUnselectedColorProperty =
-            BindableProperty.Create(nameof(DisabledUnselectedColor), typeof(Color), typeof(MaterialSegmented), defaultValue: Color.White);
+            BindableProperty.Create(nameof(DisabledUnselectedColor), typeof(Color), typeof(MaterialSegmentedBase), defaultValue: Color.White);
 
         public Color DisabledUnselectedColor
         {
@@ -98,21 +98,12 @@ namespace Plugin.MaterialDesignControls.Material3
         }
 
         public static readonly BindableProperty ItemsSourceProperty =
-            BindableProperty.Create(nameof(ItemsSource), typeof(IList), typeof(MaterialSegmented), defaultValue: null, propertyChanged: OnItemsSourceChanged);
+            BindableProperty.Create(nameof(ItemsSource), typeof(IList), typeof(MaterialSegmentedBase), defaultValue: null, propertyChanged: OnItemsSourceChanged);
 
         public IList ItemsSource
         {
             get { return (IList)GetValue(ItemsSourceProperty); }
             set { SetValue(ItemsSourceProperty, value); }
-        }
-
-        public static readonly BindableProperty SelectedItemProperty =
-            BindableProperty.Create(nameof(SelectedItem), typeof(object), typeof(MaterialSegmented), defaultValue: null, BindingMode.TwoWay, propertyChanged: OnSelectedItemChanged);
-
-        public object SelectedItem
-        {
-            get { return GetValue(SelectedItemProperty); }
-            set { SetValue(SelectedItemProperty, value); }
         }
         
         public static readonly BindableProperty TextPropertyPathProperty =
@@ -147,7 +138,7 @@ namespace Plugin.MaterialDesignControls.Material3
         private bool IsTrailingIconPropertyPathSet => !string.IsNullOrEmpty(TrailingIconPropertyPath);
 
         public static readonly BindableProperty CornerRadiusProperty =
-            BindableProperty.Create(nameof(CornerRadius), typeof(double), typeof(MaterialSegmented), defaultValue: 20.0);
+            BindableProperty.Create(nameof(CornerRadius), typeof(double), typeof(MaterialSegmentedBase), defaultValue: 20.0);
 
         public double CornerRadius
         {
@@ -156,7 +147,7 @@ namespace Plugin.MaterialDesignControls.Material3
         }
 
         public static readonly BindableProperty SegmentMarginProperty =
-            BindableProperty.Create(nameof(SegmentMargin), typeof(int), typeof(MaterialSegmented), defaultValue: 2);
+            BindableProperty.Create(nameof(SegmentMargin), typeof(int), typeof(MaterialSegmentedBase), defaultValue: 2);
 
         public int SegmentMargin
         {
@@ -165,7 +156,7 @@ namespace Plugin.MaterialDesignControls.Material3
         }
 
         public static readonly BindableProperty SelectedTextColorProperty =
-            BindableProperty.Create(nameof(SelectedTextColor), typeof(Color), typeof(MaterialSegmented), defaultValue: Color.Black);
+            BindableProperty.Create(nameof(SelectedTextColor), typeof(Color), typeof(MaterialSegmentedBase), defaultValue: Color.Black);
 
         public Color SelectedTextColor
         {
@@ -174,7 +165,7 @@ namespace Plugin.MaterialDesignControls.Material3
         }
 
         public static readonly BindableProperty DisabledSelectedTextColorProperty =
-            BindableProperty.Create(nameof(DisabledSelectedTextColor), typeof(Color), typeof(MaterialSegmented), defaultValue: Color.DimGray);
+            BindableProperty.Create(nameof(DisabledSelectedTextColor), typeof(Color), typeof(MaterialSegmentedBase), defaultValue: Color.DimGray);
 
         public Color DisabledSelectedTextColor
         {
@@ -183,7 +174,7 @@ namespace Plugin.MaterialDesignControls.Material3
         }
 
         public static readonly BindableProperty UnselectedTextColorProperty =
-            BindableProperty.Create(nameof(UnselectedTextColor), typeof(Color), typeof(MaterialSegmented), defaultValue: Color.Black);
+            BindableProperty.Create(nameof(UnselectedTextColor), typeof(Color), typeof(MaterialSegmentedBase), defaultValue: Color.Black);
 
         public Color UnselectedTextColor
         {
@@ -192,7 +183,7 @@ namespace Plugin.MaterialDesignControls.Material3
         }
 
         public static readonly BindableProperty DisabledUnselectedTextColorProperty =
-            BindableProperty.Create(nameof(DisabledUnselectedTextColor), typeof(Color), typeof(MaterialSegmented), defaultValue: Color.Gray);
+            BindableProperty.Create(nameof(DisabledUnselectedTextColor), typeof(Color), typeof(MaterialSegmentedBase), defaultValue: Color.Gray);
 
         public Color DisabledUnselectedTextColor
         {
@@ -201,7 +192,7 @@ namespace Plugin.MaterialDesignControls.Material3
         }
 
         public static readonly BindableProperty FontSizeProperty =
-            BindableProperty.Create(nameof(FontSize), typeof(double), typeof(MaterialSegmented), defaultValue: 14.0);
+            BindableProperty.Create(nameof(FontSize), typeof(double), typeof(MaterialSegmentedBase), defaultValue: 14.0);
 
         public double FontSize
         {
@@ -210,7 +201,7 @@ namespace Plugin.MaterialDesignControls.Material3
         }
 
         public static readonly BindableProperty FontFamilyProperty =
-            BindableProperty.Create(nameof(FontFamily), typeof(string), typeof(MaterialSegmented), defaultValue: null);
+            BindableProperty.Create(nameof(FontFamily), typeof(string), typeof(MaterialSegmentedBase), defaultValue: null);
 
         public string FontFamily
         {
@@ -219,7 +210,7 @@ namespace Plugin.MaterialDesignControls.Material3
         }
         
         public static readonly BindableProperty BorderColorProperty =
-            BindableProperty.Create(nameof(BorderColor), typeof(Color), typeof(MaterialSegmented), defaultValue: Color.DimGray);
+            BindableProperty.Create(nameof(BorderColor), typeof(Color), typeof(MaterialSegmentedBase), defaultValue: Color.DimGray);
 
         public Color BorderColor
         {
@@ -228,7 +219,7 @@ namespace Plugin.MaterialDesignControls.Material3
         }
 
         public static readonly BindableProperty DisabledBorderColorProperty =
-            BindableProperty.Create(nameof(DisabledBorderColor), typeof(Color), typeof(MaterialSegmented), defaultValue: Color.Gray);
+            BindableProperty.Create(nameof(DisabledBorderColor), typeof(Color), typeof(MaterialSegmentedBase), defaultValue: Color.Gray);
 
         public Color DisabledBorderColor
         {
@@ -236,26 +227,8 @@ namespace Plugin.MaterialDesignControls.Material3
             set { SetValue(DisabledBorderColorProperty, value); }
         }
 
-        public static readonly BindableProperty CommandProperty =
-            BindableProperty.Create(nameof(Command), typeof(ICommand), typeof(MaterialSegmented));
-
-        public ICommand Command
-        {
-            get { return (ICommand)GetValue(CommandProperty); }
-            set { SetValue(CommandProperty, value); }
-        }
-
-        public static readonly BindableProperty CommandParameterProperty =
-            BindableProperty.Create(nameof(CommandParameter), typeof(object), typeof(MaterialSegmented), defaultValue: null);
-
-        public object CommandParameter
-        {
-            get { return GetValue(CommandParameterProperty); }
-            set { SetValue(CommandParameterProperty, value); }
-        }
-        
         public new static readonly BindableProperty SegmentTypeProperty =
-            BindableProperty.Create(nameof(SegmentType), typeof(SegmentedType), typeof(MaterialSegmented), defaultValue: SegmentedType.Outlined, propertyChanged: SegmentTypeChanged);
+            BindableProperty.Create(nameof(SegmentType), typeof(SegmentedType), typeof(MaterialSegmentedBase), defaultValue: SegmentedType.Outlined, propertyChanged: SegmentTypeChanged);
 
         public SegmentedType SegmentType
         {
@@ -264,7 +237,7 @@ namespace Plugin.MaterialDesignControls.Material3
         }
         
         public new static readonly BindableProperty SelectedIconProperty =
-            BindableProperty.Create(nameof(SelectedIcon), typeof(ImageSource), typeof(MaterialSegmented), defaultValue: new FontImageSource() { Glyph = "✓", Color = Color.Black }, propertyChanged: SelectedIconChanged);
+            BindableProperty.Create(nameof(SelectedIcon), typeof(ImageSource), typeof(MaterialSegmentedBase), defaultValue: new FontImageSource() { Glyph = "✓", Color = Color.Black }, propertyChanged: SelectedIconChanged);
 
         [TypeConverter(typeof (ImageSourceConverter))]
         public ImageSource SelectedIcon
@@ -274,7 +247,7 @@ namespace Plugin.MaterialDesignControls.Material3
         }
         
         public new static readonly BindableProperty ShowSelectedIconProperty =
-            BindableProperty.Create(nameof(ShowSelectedIcon), typeof(bool), typeof(MaterialSegmented), defaultValue: true);
+            BindableProperty.Create(nameof(ShowSelectedIcon), typeof(bool), typeof(MaterialSegmentedBase), defaultValue: true);
 
         public bool ShowSelectedIcon
         {
@@ -309,23 +282,13 @@ namespace Plugin.MaterialDesignControls.Material3
 
         private static void OnItemsSourceChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            var control = (MaterialSegmented)bindable;
+            var control = (MaterialSegmentedBase)bindable;
             control.SetupItemFrames();
-        }
-
-        private static void OnSelectedItemChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            var control = (MaterialSegmented)bindable;
-
-            if (control.itemFramesSetup)
-            {
-                control.UpdateFrameSelection();
-            }
         }
 
         private static void SegmentTypeChanged(BindableObject bindable, object oldvalue, object newvalue)
         {
-            var control = (MaterialSegmented)bindable;
+            var control = (MaterialSegmentedBase)bindable;
 
             control.UpdateSegmentTypeBindings();
             control.SetupItemFrames();
@@ -338,7 +301,7 @@ namespace Plugin.MaterialDesignControls.Material3
             
             if (oldIcon.IsEmpty != newIcon.IsEmpty)
             {
-                var control = (MaterialSegmented)bindable;
+                var control = (MaterialSegmentedBase)bindable;
 
                 control.SetupItemFrames();
             }
@@ -346,7 +309,7 @@ namespace Plugin.MaterialDesignControls.Material3
         
         private static void ElementRelatedPropertyPathChanged(BindableObject bindable, object oldvalue, object newvalue)
         {
-            var control = (MaterialSegmented)bindable;
+            var control = (MaterialSegmentedBase)bindable;
             control.UpdateElementRelatedBounds();
         }
 
@@ -490,33 +453,24 @@ namespace Plugin.MaterialDesignControls.Material3
                 }
             }
         }
+        
+        protected abstract void OnItemTapped(int itemIndex);
 
-        private void CheckForWrongSelectedItem()
+        protected abstract bool IsItemSelected(int itemIndex);
+
+        protected void SelectionChanged()
         {
-            if (ItemsSource.Count == 0) return;
-
-            if (Equals(SelectedItem, null) || !Any(ItemsSource, item => item.Equals(SelectedItem)))
-                SelectedItem = ItemsSource[0];
+            UpdateFrameSelection();
         }
-
-        protected virtual void OnItemTapped(int itemIndex)
+        
+        private void UpdateFrameSelection()
         {
-            if (!IsEnabled)
+            if (!itemFramesSetup)
                 return;
-
-            SelectedItem = ItemsSource[itemIndex];
             
-            if (CommandProperty != null && Command != null)
-                Command.Execute(CommandParameter);
-        }
-
-        protected virtual void UpdateFrameSelection()
-        {
-            CheckForWrongSelectedItem();
-
             for (int i = 0; i < ItemsSource.Count; i++)
             {
-                SetFrameSelected(itemFrames[i], Equals(ItemsSource[i], SelectedItem), ItemsSource[i]);
+                SetFrameSelected(itemFrames[i], IsItemSelected(i), ItemsSource[i]);
             }
         }
 
@@ -557,18 +511,6 @@ namespace Plugin.MaterialDesignControls.Material3
                 selectImage.SetBinding(Image.IsVisibleProperty, new Binding(nameof(ShowSelectedIcon), source: this));
             else
                 selectImage.IsVisible = false;
-        }
-
-
-        private static bool Any(IEnumerable source, Func<object, bool> predicate)
-        {
-            foreach (var obj in source)
-            {
-                if (predicate.Invoke(obj))
-                    return true;
-            }
-
-            return false;
         }
 
         #endregion Methods

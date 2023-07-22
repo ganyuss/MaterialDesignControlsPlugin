@@ -2,7 +2,7 @@
 <ContentView
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="Plugin.MaterialDesignControls.Material3.MaterialSegmented"
+    x:Class="Plugin.MaterialDesignControls.Material3.MaterialSegmentedBase"
     HeightRequest="40">
     <ContentView.Content>
         <Frame x:Name="borderFrame" Padding="1" HasShadow="False" VerticalOptions="Fill" IsClippedToBounds="True" Margin="1">
