@@ -50,6 +50,11 @@
     <EmbeddedResource Remove="Pages\sfdgsd.xaml" />
     <EmbeddedResource Remove="Pages\MaterialButtonPage %28copy%29.xaml" />
     <EmbeddedResource Remove="Pages\MaterialButtonPage %28copy%29.xaml" />
+    <None Remove="Resources\Png\Selected.png" />
+    <None Remove="Resources\Png\selected_b.png" />
+    <EmbeddedResource Include="Resources\Png\selected_b.png" />
+    <None Remove="Resources\Png\selected_w.png" />
+    <EmbeddedResource Include="Resources\Png\selected_w.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources/Fonts/*" />

@@ -1,257 +1,151 @@
-﻿using Plugin.MaterialDesignControls.Objects;
-using System;
+﻿using System;
+using System.Collections;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
+using Microsoft.Toolkit.Mvvm.ComponentModel;
+using Plugin.MaterialDesignControls.Material3;
 using Xamarin.Forms;
 
 namespace ExampleMaterialDesignControls.ViewModels
 {
     public class MaterialSegmentedViewModel : BaseViewModel
-    {
-        private MaterialSegmentedItem _selectedItem;
-        public MaterialSegmentedItem SelectedItem
+    { 
+        public string SelectedIconSvgUri => "resource://ExampleMaterialDesignControls.Resources.Svg.starSelected.svg";
+        
+        private string selectedItem;
+        public string SelectedItem
+        { 
+            get => selectedItem;
+            set => SetProperty(ref selectedItem, value);
+	    }
+
+        private string selectedSize;
+        public string SelectedSize
+        { 
+            get => selectedSize;
+            set => SetProperty(ref selectedSize, value);
+	    }
+
+        private ObservableCollection<string> items;
+
+        public ObservableCollection<string> Items
         {
-            get => _selectedItem;
-            set => SetProperty(ref _selectedItem, value);
+            get { return items; }
+            set { SetProperty(ref items, value); }
         }
 
-        private MaterialSegmentedItem _selectedItem3;
-        public MaterialSegmentedItem SelectedItem3
+        private ObservableCollection<string> items2;
+
+        public ObservableCollection<string> Items2
         {
-            get => _selectedItem3;
-            set => SetProperty(ref _selectedItem3, value);
+            get { return items2; }
+            set { SetProperty(ref items2, value); }
         }
 
-        private MaterialSegmentedItem _selectedItem5;
-        public MaterialSegmentedItem SelectedItem5
+        private ObservableCollection<string> sizes;
+
+        public ObservableCollection<string> Sizes
         {
-            get => _selectedItem5;
-            set => SetProperty(ref _selectedItem5, value);
+            get { return sizes; }
+            set { SetProperty(ref sizes, value); }
         }
 
-        private ObservableCollection<MaterialSegmentedItem> _items;
-
-        public ObservableCollection<MaterialSegmentedItem> Items
+        private ObservableCollection<string> onOff;
+        public ObservableCollection<string> OnOff
         {
-            get { return _items; }
-            set { SetProperty(ref _items, value); }
+            get { return onOff; }
+            set { SetProperty(ref onOff, value); }
         }
 
-        private ObservableCollection<MaterialSegmentedItem> _items2;
-
-        public ObservableCollection<MaterialSegmentedItem> Items2
+        private ObservableCollection<string> backlight;
+        public ObservableCollection<string> Backlight
         {
-            get { return _items2; }
-            set { SetProperty(ref _items2, value); }
+            get { return backlight; }
+            set { SetProperty(ref backlight, value); }
         }
 
-
-        private ObservableCollection<MaterialSegmentedItem> _items3;
-
-        public ObservableCollection<MaterialSegmentedItem> Items3
-        {
-            get { return _items3; }
-            set { SetProperty(ref _items3, value); }
-        }
-
-        private ObservableCollection<MaterialSegmentedItem> _items4;
-
-        public ObservableCollection<MaterialSegmentedItem> Items4
-        {
-            get { return _items4; }
-            set { SetProperty(ref _items4, value); }
-        }
-
-        private ObservableCollection<MaterialSegmentedItem> _sizes;
-
-        public ObservableCollection<MaterialSegmentedItem> Sizes
-        {
-            get { return _sizes; }
-            set { SetProperty(ref _sizes, value); }
-        }
-
-        private ObservableCollection<MaterialSegmentedItem> frecuently;
-        public ObservableCollection<MaterialSegmentedItem> Frecuently
+        private ObservableCollection<string> frecuently;
+        public ObservableCollection<string> Frecuently
         {
             get { return frecuently; }
             set { SetProperty(ref frecuently, value); }
         }
 
-        private ObservableCollection<MaterialSegmentedItem> _items5;
-
-        public ObservableCollection<MaterialSegmentedItem> Items5
+        private ObservableCollection<SegmentedType> segmentTypes;
+        public ObservableCollection<SegmentedType> SegmentTypes
         {
-            get { return _items5; }
-            set { SetProperty(ref _items5, value); }
+            get { return segmentTypes; }
+            set { SetProperty(ref segmentTypes, value); }
+        }
+
+        private SegmentedType selectedSegmentType; 
+        public SegmentedType SelectedSegmentType
+        {
+            get { return selectedSegmentType; }
+            set { SetProperty(ref selectedSegmentType, value); }
+        }
+
+        private ObservableCollection<SelectableColor> availableColors;
+        public ObservableCollection<SelectableColor> AvailableColors
+        {
+            get { return availableColors; }
+            set { SetProperty(ref availableColors, value); }
+        }
+        
+        private SelectableColor selectedColor; 
+        public SelectableColor SelectedColor
+        {
+            get { return selectedColor; }
+            set { SetProperty(ref selectedColor, value); }
         }
 
         public MaterialSegmentedViewModel()
         {
-            Items = new ObservableCollection<MaterialSegmentedItem> 
+            Items = new ObservableCollection<string> { "Complete","Incomplete","Pending"};
+            SelectedItem = Items[0];
+            Items2 = new ObservableCollection<string> { "Music", "Photos", "Movies", "Apps" };
+            Sizes = new ObservableCollection<string> { "XS","S","M","L","XL"};
+            OnOff = new ObservableCollection<string> { "Off","On"};
+            Backlight = new ObservableCollection<string> { "Backlight On","Backlight Off"};
+            Frecuently = new ObservableCollection<string> { "Day","Week","Month"};
+
+            SegmentTypes = new ObservableCollection<SegmentedType> { SegmentedType.Filled, SegmentedType.Outlined };
+
+            AvailableColors = new ObservableCollection<SelectableColor>
             {
-                new MaterialSegmentedItem
-                {
-                    Text = "Opt1",
-                    IsSelected = true,
-                },
-                new MaterialSegmentedItem
-                {
-                    Text = "Opt2",
-                },
-                new MaterialSegmentedItem
-                {
-                    Text = "Opt3",
-                }
+                new() { Color = Color.Pink, ColorName = nameof(Color.Pink) }, 
+                new() { Color = Color.Aquamarine, ColorName = nameof(Color.Aquamarine) },
+                new() { Color = Color.Lavender, ColorName = nameof(Color.Lavender) }
             };
-
-            Items2 = new ObservableCollection<MaterialSegmentedItem>
-            {
-                new MaterialSegmentedItem
-                {
-                    Text = "Opt1",
-                },
-                new MaterialSegmentedItem
-                {
-                    Text = "Opt2",
-                },
-                new MaterialSegmentedItem
-                {
-                    Text = "Opt3",
-                }
-            };
-
-
-            Items3 = new ObservableCollection<MaterialSegmentedItem>
-            {
-                new MaterialSegmentedItem
-                {
-                    Text = "Opt1",
-                    SelectedIcon = "email.png",
-                    UnselectedIcon = "Cross.png"
-                },
-                new MaterialSegmentedItem
-                {
-                    Text = "Opt2",
-                    SelectedIcon = "checkbox_checked.png",
-                },
-                new MaterialSegmentedItem
-                {
-                    Text = "Opt3",
-                    SelectedIcon = "Cross.png"
-                }
-            };
-
-            Items4 = new ObservableCollection<MaterialSegmentedItem>
-            {
-                new MaterialSegmentedItem
-                {
-                    Text = "Opt1",
-                    SelectedIcon = "checkbox_checked.png",
-                    UnselectedIcon = "checkbox_disabledUnchecked.png"
-                },
-                new MaterialSegmentedItem
-                {
-                    Text = "Opt2",
-                    SelectedIcon = "checkbox_checked.png",
-                    UnselectedIcon = "checkbox_disabledUnchecked.png"
-                },
-                new MaterialSegmentedItem
-                {
-                    Text = "Opt3",
-                    SelectedIcon = "checkbox_checked.png",
-                    IsSelected = true,
-                }
-            };
-
-
-            Sizes = new ObservableCollection<MaterialSegmentedItem> 
-            {
-                new MaterialSegmentedItem
-                {
-                    Text = "XS"
-                },
-                new MaterialSegmentedItem
-                {
-                    Text = "S"
-                },
-                new MaterialSegmentedItem
-                {
-                    Text = "M",
-                    IsSelected = true,
-                },
-                new MaterialSegmentedItem
-                {
-                    Text = "L"
-                },
-                new MaterialSegmentedItem
-                {
-                    Text = "XL"
-                }
-            };
-
-            Frecuently = new ObservableCollection<MaterialSegmentedItem>()
-            {
-                new MaterialSegmentedItem
-                {
-                    Text = "Daily"
-                },
-                new MaterialSegmentedItem
-                {
-                    Text = "Weekly"
-                },
-                new MaterialSegmentedItem
-                {
-                    Text = "Monthly",
-                },
-                new MaterialSegmentedItem
-                {
-                    Text = "Yearly"
-                }
-            };
-
-            SelectedItem = Frecuently.First();
-
-
-            Items5 = new ObservableCollection<MaterialSegmentedItem>
-            {
-                new MaterialSegmentedItem
-                {
-                    Text = "Opt1",
-                    SelectedIcon = "checkbox_checked.png",
-                    UnselectedIcon = "checkbox_disabledUnchecked.png"
-                },
-                new MaterialSegmentedItem
-                {
-                    Text = "Opt2",
-                    SelectedIcon = "checkbox_checked.png",
-                    UnselectedIcon = "checkbox_disabledUnchecked.png"
-                },
-                new MaterialSegmentedItem
-                {
-                    Text = "Opt3",
-                    SelectedIcon = "checkbox_checked.png",
-                    IsSelected = true,
-                }
-            };
-
-            SelectedItem5 = Items5.Last();
         }
 
-        public ICommand SaveCommand => new Command(async () =>
+        public ICommand SaveCommand => new Command( async()=>
         {
-            Console.WriteLine(true);
-            await this.DisplayAlert.Invoke("Frecuently", $"Selected item: {SelectedItem}", "Ok");
+            await this.DisplayAlert.Invoke("Size", $"Selected item: {SelectedItem}", "Ok");
         });
 
-        public ICommand SelectCommand => new Command(async () =>
+        public ICommand SelectCommand => new Command( async ()=>
         {
-            await this.DisplayAlert.Invoke("Size", $"Selected command: {SelectedItem3}", "Ok");
+            await this.DisplayAlert.Invoke("Size", $"Selected command: {SelectedSize}", "Ok");
         });
 
-        public ICommand SelectItem5Command => new Command(async () =>
+        public class SelectableColor : ObservableObject
         {
-            await this.DisplayAlert.Invoke("Size", $"Selected command: {SelectedItem5}", "Ok");
-        });
+            private Color _color;
+            public Color Color { 
+                get => _color;
+                set => SetProperty(ref _color, value); 
+            }
+            
+            private string _colorName;
+            public string ColorName { 
+                get => _colorName;
+                set => SetProperty(ref _colorName, value); 
+            }
+
+
+            public ImageSource ColorIcon => new FontImageSource() { Glyph = "■", Color = Color };
+        }
     }
 }
