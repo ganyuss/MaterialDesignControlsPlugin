@@ -383,18 +383,12 @@ namespace Plugin.MaterialDesignControls.Material3
                     _frameLayout.CornerRadius = Convert.ToInt32(CornerRadius);
                     break;
                 case nameof(LeadingIcon):
-                    if (LeadingIcon != null)
-                    {
-                        _leadingIconContentView.Content = LeadingIcon;
-                        _leadingIconContentView.IsVisible = true;
-                    }
+                    _leadingIconContentView.Content = LeadingIcon;
+                    _leadingIconContentView.IsVisible = LeadingIcon != null;
                     break;
                 case nameof(TrailingIcon):
-                    if (TrailingIcon != null)
-                    {
-                        _trailingIconContentView.Content = TrailingIcon;
-                        _trailingIconContentView.IsVisible = true;
-                    }
+                    _trailingIconContentView.Content = TrailingIcon;
+                    _trailingIconContentView.IsVisible = TrailingIcon != null;
                     break;
                 case nameof(IconSize):
                     _leadingIconContentView.HeightRequest = IconSize;
