@@ -47,7 +47,7 @@ public class MaterialSegmented : MaterialSegmentedBase
 
     private void CheckForWrongSelectedItem()
     {
-        if (ItemsSource.Count == 0) return;
+        if (ItemsSource == null || ItemsSource.Count == 0) return;
 
         if (Equals(SelectedItem, null) || ! ItemsSource.Contains(SelectedItem))
             SelectedItem = ItemsSource[0];

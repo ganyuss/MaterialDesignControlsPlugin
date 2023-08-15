@@ -237,7 +237,7 @@ namespace Plugin.MaterialDesignControls.Material3
         }
         
         public new static readonly BindableProperty SelectedIconProperty =
-            BindableProperty.Create(nameof(SelectedIcon), typeof(ImageSource), typeof(MaterialSegmentedBase), defaultValue: new FontImageSource() { Glyph = "✓", Color = Color.Black }, propertyChanged: SelectedIconChanged);
+            BindableProperty.Create(nameof(SelectedIcon), typeof(ImageSource), typeof(MaterialSegmentedBase), defaultValue: null, propertyChanged: SelectedIconChanged);
 
         [TypeConverter(typeof (ImageSourceConverter))]
         public ImageSource SelectedIcon
@@ -317,13 +317,13 @@ namespace Plugin.MaterialDesignControls.Material3
         {
             var oldIcon = (ImageSource)oldvalue; 
             var newIcon = (ImageSource)newvalue;
-            
-            if (oldIcon.IsEmpty != newIcon.IsEmpty)
-            {
-                var control = (MaterialSegmentedBase)bindable;
 
-                control.SetupItemFrames();
-            }
+            if (oldIcon == newIcon) 
+                return;
+            
+            var control = (MaterialSegmentedBase)bindable;
+
+            control.SetupItemFrames();
         }
         
         private static void ElementRelatedPropertyPathChanged(BindableObject bindable, object oldvalue, object newvalue)
