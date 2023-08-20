@@ -320,8 +320,10 @@ namespace Plugin.MaterialDesignControls.Material3
                 Text = ToUpper ? Text?.ToUpper() : Text,
                 FontSize = FontSize,
                 FontFamily = FontFamily,
+                IsVisible = !string.IsNullOrEmpty(Text),
 
             };
+            
             _stcLayout.Children.Add(_textLabel);
 
             _trailingIconContentView = new ContentView
@@ -372,6 +374,7 @@ namespace Plugin.MaterialDesignControls.Material3
                 case nameof(Text):
                 case nameof(ToUpper):
                     _textLabel.Text = ToUpper ? Text?.ToUpper() : Text;
+                    _textLabel.IsVisible = !string.IsNullOrEmpty(Text);
                     break;
                 case nameof(FontSize):
                     _textLabel.FontSize = FontSize;
